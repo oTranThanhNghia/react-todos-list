@@ -1,12 +1,15 @@
-import {ResponseData} from './common/request'
+import { TodoModel } from '../model/todos';
+import { ResponseData } from './common/request';
 import { parsedTodo } from './parsed';
 
-const fetchTodoList = async (): ResponseData => {
-    const url = "https://jsonplaceholder.typicode.com/todos";
-    const response = await fetch(url);
-    const data = response.json();
-    const responseData: ResponseData = {
-        data
-    }
-    const paredObject= parsedTodo(responseData);
-}
+const fetchTodoList = async (): Promise<ResponseData<TodoModel>> => {
+  const url = 'https://jsonplaceholder.typicode.com/todos';
+  const response = await fetch(url);
+  const data = await response.json();
+  const responseData: ResponseData<TodoModel> = {
+    data,
+    error: null,
+  };
+  const paredObject = parsedTodo({ res: responseData });
+  return responseData;
+};

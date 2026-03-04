@@ -2,7 +2,7 @@
 
 // };
 
-export const interface ResponseData {
-    data: any;
-    error: Error;
+export interface ResponseData<T> {
+  data: T;
+  error: Error | null;
 }
